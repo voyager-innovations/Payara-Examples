@@ -33,7 +33,7 @@ import org.h2.tools.Server;
         name = "java:global/savingsDS",
         className = "org.postgresql.Driver",
         url = "jdbc:postgresql://ndbench-postgres.cqbpwgwhtywd.us-west-2.rds.amazonaws.com:5432/banking_db?" +
-                "user=cfs_dev&password=somepassword&ssl=true"
+                "user=cfs_dev&password=DoNotPutPasswordHere&ssl=true"
         url = "jdbc:h2:~/checking_db;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO"
 )
 
