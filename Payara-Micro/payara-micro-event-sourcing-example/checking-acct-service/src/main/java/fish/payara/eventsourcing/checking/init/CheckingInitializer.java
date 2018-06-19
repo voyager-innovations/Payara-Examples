@@ -25,16 +25,18 @@ import org.h2.tools.Server;
         maxPoolSize = 2,
         transactionSupport = TransactionSupport.TransactionSupportLevel.NoTransaction,
         properties = {
-            "bootstrapServersConfig=localhost:9092",
+            "bootstrapServersConfig=ec2-34-221-128-252.us-west-2.compute.amazonaws.com:9092",
             "clientId=PayaraMicroMessenger"
         })
 @DataSourceDefinition(
         // global to circumvent https://java.net/jira/browse/GLASSFISH-21447
         name = "java:global/savingsDS",
-        className = "org.postgresql.Driver",
-        url = "jdbc:postgresql://ndbench-postgres.cqbpwgwhtywd.us-west-2.rds.amazonaws.com:5432/banking_db?" +
-                "user=cfs_dev&password=somepassword&ssl=true"
-        url = "jdbc:h2:~/checking_db;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO"
+        //className = "org.postgresql.Driver",
+        className = "fish.payara.eventsourcing.datasource.SwitchableXADataSource",
+        url = "jdbc:postgresql://ndbench-postgres.cqbpwgwhtywd.us-west-2.rds.amazonaws.com:5432/banking_db",
+        properties = {"configFile=datasource-settings.xml"}
+        /*url = "jdbc:postgresql://ndbench-postgres.cqbpwgwhtywd.us-west-2.rds.amazonaws.com:5432/banking_db?" +
+                "user=cfs_dev&password=somepwd&ssl=true"*/
 )
 
 @ApplicationScoped
@@ -115,10 +117,12 @@ public class CheckingInitializer {
     private void startDBServer() {
         try {
             // start a TCP server
-            Server server = Server.createTcpServer("-tcpPort", "9122", "-tcpAllowOthers").start();
+            Server server = Server.createTcpServer("-tcpPort", "5432", "-tcpAllowOthers").start();
 
             LOGGER.log(Level.INFO, "Server started and connection is open.");
-            LOGGER.log(Level.INFO, "URL: jdbc:h2:{0}/~/checking_db", server.getURL());
+            //LOGGER.log(Level.INFO, "URL: jdbc:h2:{0}/~/savings_db", server.getURL());
+            LOGGER.log(Level.INFO, "URL: jdbc:postgresql:{0}/~/banking_db", server.getURL());
+
         } catch (SQLException sqlException) {
             LOGGER.log(Level.SEVERE, "SQL Exception caught", sqlException);
         }

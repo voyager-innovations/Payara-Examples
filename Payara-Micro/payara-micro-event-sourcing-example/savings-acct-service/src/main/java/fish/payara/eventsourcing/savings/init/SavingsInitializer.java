@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.annotation.sql.DataSourceDefinition;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
@@ -25,15 +26,22 @@ import org.h2.tools.Server;
         maxPoolSize = 2,
         transactionSupport = TransactionSupport.TransactionSupportLevel.NoTransaction,
         properties = {
-            "bootstrapServersConfig=localhost:9092",
+            "bootstrapServersConfig=ec2-34-221-128-252.us-west-2.compute.amazonaws.com:9092",
             "clientId=PayaraMicroMessenger"
         })
+
+
 @DataSourceDefinition(
         // global to circumvent https://java.net/jira/browse/GLASSFISH-21447
         name = "java:global/savingsDS",
-        className = "org.h2.jdbcx.JdbcDataSource",
-        url = "jdbc:h2:~/savings_db;DB_CLOSE_ON_EXIT=FALSE;FILE_LOCK=NO"
+        //className = "org.postgresql.Driver",
+        className = "fish.payara.eventsourcing.datasource.SwitchableXADataSource",
+        properties = {"configFile=datasource-settings.xml"}
+        /*url = "jdbc:postgresql://ndbench-postgres.cqbpwgwhtywd.us-west-2.rds.amazonaws.com:5432/banking_db?" +
+                "user=cfs_dev&password=somepwd&ssl=true"*/
+
 )
+
 
 @ApplicationScoped
 public class SavingsInitializer {
@@ -116,7 +124,8 @@ public class SavingsInitializer {
             Server server = Server.createTcpServer("-tcpPort", "9123", "-tcpAllowOthers").start();
 
             LOGGER.log(Level.INFO, "Server started and connection is open.");
-            LOGGER.log(Level.INFO, "URL: jdbc:h2:{0}/~/savings_db", server.getURL());
+            //LOGGER.log(Level.INFO, "URL: jdbc:h2:{0}/~/savings_db", server.getURL());
+            LOGGER.log(Level.INFO, "URL: jdbc:postgresql:{0}/~/banking_db", server.getURL());
         } catch (SQLException sqlException) {
             LOGGER.log(Level.SEVERE, "SQL Exception caught", sqlException);
         }

@@ -10,6 +10,7 @@
         <module>checking-acct-service</module>
         <module>common</module>
         <module>fundtransferui</module>
+        <module>datasource-wrapper</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

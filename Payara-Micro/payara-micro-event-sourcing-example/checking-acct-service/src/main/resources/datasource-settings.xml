@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <!-- <entry key="className">org.postgresql.xa.PGXADataSource</entry> -->
+    <entry key="className">org.postgresql.xa.PGXADataSource</entry>
+    <entry key="user">cfs_dev</entry>
+    <entry key="password">stingy-hoarD0z@rk</entry>
+
+    <entry key="serverName">ndbench-postgres.cqbpwgwhtywd.us-west-2.rds.amazonaws.com</entry>
+    <entry key="databaseName">banking_db</entry>
+    <entry key="portNumber">5432</entry>
+
+
+
+</properties>

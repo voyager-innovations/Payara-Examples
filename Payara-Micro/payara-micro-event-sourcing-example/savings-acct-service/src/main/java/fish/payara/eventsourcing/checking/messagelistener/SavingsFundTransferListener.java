@@ -24,7 +24,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
     ,
     @ActivationConfigProperty(propertyName = "topics", propertyValue = "savingsacct-topic")
     ,
-    @ActivationConfigProperty(propertyName = "bootstrapServersConfig", propertyValue = "localhost:9092")
+    @ActivationConfigProperty(propertyName = "bootstrapServersConfig", propertyValue = "ec2-34-221-128-252.us-west-2.compute.amazonaws.com:9092")
     ,   
     @ActivationConfigProperty(propertyName = "autoCommitInterval", propertyValue = "100")
     ,   
