@@ -28,7 +28,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
     ,
     @ActivationConfigProperty(propertyName = "topics", propertyValue = "checkingacct-topic")
     ,
-    @ActivationConfigProperty(propertyName = "bootstrapServersConfig", propertyValue = "localhost:9092")
+    @ActivationConfigProperty(propertyName = "bootstrapServersConfig", propertyValue = "kafka-server:9092")
     ,   
     @ActivationConfigProperty(propertyName = "autoCommitInterval", propertyValue = "100")
     ,   

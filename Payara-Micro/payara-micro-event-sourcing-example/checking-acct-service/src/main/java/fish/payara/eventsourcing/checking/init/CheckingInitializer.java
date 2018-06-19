@@ -31,9 +31,7 @@ import org.h2.tools.Server;
 @DataSourceDefinition(
         // global to circumvent https://java.net/jira/browse/GLASSFISH-21447
         name = "java:global/savingsDS",
-        className = "org.postgresql.Driver",
-        url = "jdbc:postgresql://ndbench-postgres.cqbpwgwhtywd.us-west-2.rds.amazonaws.com:5432/banking_db?" +
-                "user=cfs_dev&password=DoNotPutPasswordHere&ssl=true"
+        className = "org.h2.jdbcx.JdbcDataSource",
         url = "jdbc:h2:~/checking_db;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO"
 )
 
