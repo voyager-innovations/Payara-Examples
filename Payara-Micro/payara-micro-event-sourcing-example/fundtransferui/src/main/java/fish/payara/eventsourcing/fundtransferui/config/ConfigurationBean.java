@@ -17,7 +17,7 @@ import javax.resource.spi.TransactionSupport;
         maxPoolSize = 2,
         transactionSupport = TransactionSupport.TransactionSupportLevel.NoTransaction,
         properties = {
-            "bootstrapServersConfig=localhost:9092",
+            "bootstrapServersConfig=kafka-server:9092",
             "clientId=PayaraMicroMessenger"
         })
 @FacesConfig(version = FacesConfig.Version.JSF_2_3)
